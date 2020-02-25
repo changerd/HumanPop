@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanPop", "HumanPop\HumanPop.csproj", "{1597DBEC-4364-4107-9CF8-A4704CBDBFC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1597DBEC-4364-4107-9CF8-A4704CBDBFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1597DBEC-4364-4107-9CF8-A4704CBDBFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1597DBEC-4364-4107-9CF8-A4704CBDBFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1597DBEC-4364-4107-9CF8-A4704CBDBFC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7ACCE2E3-AB01-4B57-9A4D-C964CF02BDCE}
+	EndGlobalSection
+EndGlobal
