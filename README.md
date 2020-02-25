@@ -1,5 +1,5 @@
 # HumanPop
-simple training project with core 3.1 react redux
+simple training project with core 3.1 / react / redux
 
 structure of table in database:
 1. FirstName(string)
