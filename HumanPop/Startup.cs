@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace HumanPop
 {
@@ -25,7 +26,7 @@ namespace HumanPop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
 
             services.AddScoped<IRepositoryContextFactory, RepositoryContextFactory>();
             services.AddScoped<IHumanRepository>(provider => new HumanRepository(Configuration.GetConnectionString("DefaultConnection"),
@@ -41,7 +42,16 @@ namespace HumanPop
             }
 
             app.UseStaticFiles();
-            app.UseMvc();            
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "api/{controller}/{action}");
+                                
+            });
         }
     }
 }
