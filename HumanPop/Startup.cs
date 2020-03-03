@@ -39,6 +39,7 @@ namespace HumanPop
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseWebpackDevMiddleware();
             }
 
             app.UseStaticFiles();
@@ -50,7 +51,8 @@ namespace HumanPop
                 routes.MapRoute(
                     name: "DefaultApi",
                     template: "api/{controller}/{action}");
-                                
+                routes.MapSpaFallbackRoute("spa-fallback", new { controller = "Home", action = "Index" });
+
             });
         }
     }
