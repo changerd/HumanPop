@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DBRepository.Factories;
 using DBRepository.Interfaces;
 using DBRepository.Repositories;
+using HumanPop.Services.Implementation;
+using HumanPop.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,10 +30,14 @@ namespace HumanPop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IRepositoryContextFactory, RepositoryContextFactory>();
             services.AddScoped<IHumanRepository>(provider => new HumanRepository(Configuration.GetConnectionString("DefaultConnection"),
                 provider.GetService<IRepositoryContextFactory>()));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped<IHumanService, HumanService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

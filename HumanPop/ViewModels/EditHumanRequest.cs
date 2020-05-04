@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Models
+namespace HumanPop.ViewModels
 {
-    public class Human
+    public class EditHumanRequest
     {
         public int HumanId { get; set; }
         public string FirstName { get; set; }
-        public string SurName { get; set; }        
+        public string SurName { get; set; }
         public DateTime BirthDate { get; set; }
         public int NumOfArrests { get; set; }
     }

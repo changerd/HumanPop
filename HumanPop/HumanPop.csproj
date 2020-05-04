@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="App\containers\about\**" />
+    <Content Remove="App\containers\about\**" />
+    <EmbeddedResource Remove="App\containers\about\**" />
+    <None Remove="App\containers\about\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -18,8 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="App\containers\header\" />
-    <Folder Include="App\containers\about\" />
+    <Folder Include="App\containers\humans\" />
+    <Folder Include="App\containers\editHuman\" />
+    <Folder Include="App\containers\human\" />
+    <Folder Include="App\containers\newHuman\" />
+    <Folder Include="App\reducers\" />
+    <Folder Include="App\store\" />
+    <Folder Include="App\routes\" />
   </ItemGroup>
 
 </Project>

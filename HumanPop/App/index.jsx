@@ -9,4 +9,4 @@ import App from './containers/app.jsx'
 render(
     <App />,
     document.getElementById('content')
-}
+);
