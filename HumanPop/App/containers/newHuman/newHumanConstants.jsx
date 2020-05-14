@@ -1,0 +1,2 @@
+export const ADD_HUMAN_SUCCESS = 'ADD_HUMAN_SUCCESS'
+export const ADD_HUMAN_ERROR = 'ADD_HUMAN_ERROR'

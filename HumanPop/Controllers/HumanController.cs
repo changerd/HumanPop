@@ -7,12 +7,15 @@ using HumanPop.Services.Interfaces;
 using HumanPop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Newtonsoft.Json;
+
+
 
 namespace HumanPop.Controllers
 {
     [Route("api/[controller]")]
     public class HumanController : Controller
-    {
+    {        
         IHumanService _humanService;
 
         public HumanController(IHumanService humanService)
@@ -37,8 +40,8 @@ namespace HumanPop.Controllers
         [Route("human")]
         [HttpPost]
         public async Task AddHuman([FromBody] AddHumanRequest request)
-        {
-            await _humanService.AddHuman(request);
+        {            
+            await _humanService.AddHuman(request);            
         }
 
         [Route("human")]
