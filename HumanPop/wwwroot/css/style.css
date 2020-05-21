@@ -1,2 +1,6 @@
-﻿body {
+﻿.listPageNumbers {
+    margin-right: 3px;
+    display: inline-block;
+    list-style-type: none;
 }
+
