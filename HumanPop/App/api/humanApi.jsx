@@ -51,7 +51,11 @@ export function deleteHuman(humanId, returnPageIndex) {
         }
     }).then((response) => {
         if (response.ok) {
-            <Redirect to={"/humans?pageIndex=" + returnPageIndex} />
+            if (returnPageIndex) {
+                <Redirect to={"/humans?pageIndex=" + returnPageIndex} />
+            } else {
+                <Redirect to="/" />
+            }            
         } else {
             alert('Some delete error...');
         }
@@ -72,7 +76,7 @@ export function editHuman(humanId, firstName, surName, birthDate, numOfArrests) 
             body: JSON.stringify({ "humanid": humanId, "firstName": firstName, "surName": surName, "birthDate": birthDate, "numOfArrests": numOfArrests })
         }).then((response) => {
             if (response.ok) {
-                historyObject.push('/');
+                window.history.back();
             } else {
                 alert('Some error...');
             }
