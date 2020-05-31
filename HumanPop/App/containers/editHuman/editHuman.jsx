@@ -29,8 +29,8 @@ class EditHuman extends React.Component {
     }
 
     componentDidMount() {
-        this.loadHuman();        
-    }   
+        this.loadHuman();
+    }
 
     componentWillReceiveProps(nextProps) {
         if (this.state.query != location.search) {
@@ -38,20 +38,20 @@ class EditHuman extends React.Component {
             this.loadHuman();
         }
         var now = new Date(this.props.data.human.birthDate);
-            var month = (now.getMonth() + 1);
-            var day = now.getDate();
-            if (month < 10)
-                month = "0" + month;
-            if (day < 10)
-                day = "0" + day;
-            var today = now.getFullYear() + '-' + month + '-' + day;
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
         this.setState({
             firstName: this.props.data.human.firstName,
             surName: this.props.data.human.surName,
             birthDate: today,
             numOfArrests: '' + this.props.data.human.numOfArrests
         });
-    }    
+    }
 
     render() {
         return (
@@ -105,12 +105,12 @@ class EditHuman extends React.Component {
                     className="btn btn-primary"
                     value="Submit"
                     onClick={() => this.props.changeHuman(
-                            this.props.data.human.humanId,
-                            this.state.firstName,
-                            this.state.surName,
-                            this.state.birthDate,
-                            this.state.numOfArrests
-                        )}
+                        this.props.data.human.humanId,
+                        this.state.firstName,
+                        this.state.surName,
+                        this.state.birthDate,
+                        this.state.numOfArrests
+                    )}
                 />
             </div>
         );

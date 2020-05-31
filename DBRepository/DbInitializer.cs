@@ -12,6 +12,16 @@ namespace DBRepository
         {
             await context.Database.MigrateAsync();
 
+            var userCount = await context.Users.CountAsync().ConfigureAwait(false);
+            if (userCount == 0)
+            {
+                context.Users.Add(new Models.User()
+                {
+                    Login = "admin",
+                    Password = "jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg="                   
+                });
+            }
+
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }
