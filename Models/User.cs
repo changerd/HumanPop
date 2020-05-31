@@ -9,6 +9,6 @@ namespace Models
         public int UserId { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public virtual ICollection<User> Users { get; set; }        
+        public virtual ICollection<Human> Humans { get; set; }        
     }
 }
