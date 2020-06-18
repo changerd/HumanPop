@@ -1,28 +1,37 @@
-  
+import "isomorphic-fetch";
+
 const middleware = store => next => action => {
-    if (action.promise) {
-        const [startAction, successAction, failureAction] = action.actions;
 
-        store.dispatch({
-            type: startAction
-        });
-
-        action.promise
-            .then((data) => {
-                store.dispatch({
-                    type: successAction,
-                    payload: data
-                });
-            }, (error) => {
-                store.dispatch({
-                    type: failureAction,
-                    error
-                });
-            });
-
-    } else {
+    if (action.type !== 'PROMISE') {
         next(action);
     }
+
+    const [startAction, successAction, failureAction] = action.actions;
+    const { url, method, data } = action;
+
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+    }).then((r) => r.json())
+        .then((data) => {
+            store.dispatch({
+                type: successAction,
+                payload: data
+            });
+        }, (error) => {
+            alert(error);
+            store.dispatch({
+                type: failureAction,
+                error
+            });            
+        });
+
+    store.dispatch({
+        type: startAction
+    });
 }
 
 export default middleware;

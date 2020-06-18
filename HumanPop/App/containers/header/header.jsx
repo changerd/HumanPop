@@ -13,10 +13,10 @@ class Header extends React.Component {
     render() {
         let loginButton = this.props.header.isLogged ?
             <span className="nameLabel">Hello, {this.props.header.name}</span> :
-            <LoginForm onLogin={this.props.login} username={this.props.header.name} password={this.props.header.password} />
+            <LoginForm onLogin={this.props.login} />
 
         let logoutButton = this.props.header.isLogged ?
-            <button className="btn btn-dark" onClick={() => { if (confirm('You want logout?')) this.props.logout() }} >Logout</button> :
+            <button className="btn btn-dark" onClick={() => { if (confirm('Do you want logout?')) this.props.logout() }} >Logout</button> :
             '';
 
         return (

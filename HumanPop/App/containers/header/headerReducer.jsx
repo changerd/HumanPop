@@ -17,6 +17,7 @@ const initialState = {
 export default function header(state = initialState, action) {
     switch(action.type) {
         case LOGIN_SUCCESS:
+            AuthHelper.saveAuth(action.payload.username, action.payload.access_token);            
             return { ...state, isLogged: true, isLoginFormShowed: false, name: action.payload, password: '', error: '' }
 
         case LOGIN_ERROR:

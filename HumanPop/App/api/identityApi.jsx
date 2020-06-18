@@ -1,11 +1,11 @@
 import AuthHelper from '../Utils/authHelper.js';
 import "isomorphic-fetch"
 
-export function logUser(username, password) {
-    if (username && password) {
+export function logUser(userName, password) {
+    if (userName && password) {
         var data = {
-            username: username,
-            password: password
+            'username': userName,
+            'password': password
         };
 
         return fetch(constants.token, {
@@ -15,17 +15,21 @@ export function logUser(username, password) {
             },
             body: JSON.stringify(data)
         }).then((response) => {
-            if (response.ok){
+            if (response.ok) {
                 return response.json();
             } else {
-                throw 'Autheration error...'
+                //dispatch({ type: LOGIN_ERROR, payload: 'Ошибка авторизации' });
+                throw 'Ошибка авторизации';
             }
         }).then((data) => {
             AuthHelper.saveAuth(data.username, data.access_token);
-        });//.catch(ex => alert(ex));
+            //dispatch({ type: LOGIN_SUCCESS, payload: data.username });
+        }).catch((ex) => {
+            alert(ex);            
+            //dispatch({ type: LOGIN_ERROR, payload: ex });
+        });
     } else {
-        alert('Enter your username and password');
+        alert('Необходимо ввести имя пользователя и пароль');
+        //dispatch({ type: LOGIN_ERROR, payload: 'Необходимо ввести имя пользователя и пароль' });
     }
-
-
 }

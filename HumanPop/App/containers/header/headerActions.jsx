@@ -22,10 +22,10 @@ export function logout() {
     }
 }
 
-export function login(username, password) {
+export function login(userName, password) {
     return {
         type: 'PROMISE',
         actions: ['LOOGING', LOGIN_SUCCESS, LOGIN_ERROR],
-        promise: logUser(username, password)
+        promise: logUser(userName, password)
     };
 }  

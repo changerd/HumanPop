@@ -24,9 +24,9 @@ export default class LoginForm extends React.Component {
                     Sign In
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownLogin">
-                    <form className="px-4 py-3">
+                    <div className="px-4 py-3">
                         <div className="form-group">
-                            <label htmlFor="username">Login</label>
+                            <label>Login</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -47,12 +47,12 @@ export default class LoginForm extends React.Component {
                                 placeholder="Enter password" />
                         </div>
                         <input
-                            type="submit"
+                            type="button"
                             className="btn btn-dark"
                             value="Sign up"
                             onClick={() => this.props.onLogin(this.state.username, this.state.password)}
                         />
-                    </form>
+                    </div>
                     <div className="dropdown-divider"></div>
                     <a className="dropdown-item">New around here? Sign up</a>
                 </div>
