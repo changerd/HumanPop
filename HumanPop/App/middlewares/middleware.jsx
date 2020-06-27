@@ -3,7 +3,7 @@ import "isomorphic-fetch";
 const middleware = store => next => action => {
 
     if (action.type !== 'PROMISE') {
-        next(action);
+        return next(action);
     }
 
     const [startAction, successAction, failureAction] = action.actions;
