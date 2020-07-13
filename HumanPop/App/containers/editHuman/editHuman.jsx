@@ -51,6 +51,9 @@ class EditHuman extends React.Component {
             birthDate: today,
             numOfArrests: '' + this.props.data.human.numOfArrests
         });
+        if (this.props.data.isEdited) {
+            window.history.back();
+        }
     }
 
     render() {

@@ -1,19 +1,29 @@
 ﻿import React from 'react';
+import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import LoginForm from '../../components/loginForm.jsx'
 import {
     login,
     logout,
-    showLoginForm
+    showLoginForm,
+    register,
 } from './headerActions.jsx';
+import AuthHelper from '../../Utils/authHelper.js';
 
 class Header extends React.Component {
+    
+    /*componentWillReceiveProps(nextProps) {
+        if(this.props.header.isLogged == true){
+            <Redirect to='/' />
+        }
+    } */  
+
     render() {
         let loginButton = this.props.header.isLogged ?
-            <span className="nameLabel">Hello, {this.props.header.name}</span> :
-            <LoginForm onLogin={this.props.login} />
+            <span className="nameLabel">Hello, {AuthHelper.getLogin()}</span> :
+            <LoginForm onLogin={this.props.login} onRegister={this.props.register} />
 
         let logoutButton = this.props.header.isLogged ?
             <button className="btn btn-dark" onClick={() => { if (confirm('Do you want logout?')) this.props.logout() }} >Logout</button> :
@@ -51,6 +61,7 @@ let mapDispatch = (dispatch) => {
         login: bindActionCreators(login, dispatch),
         logout: bindActionCreators(logout, dispatch),
         showLoginForm: bindActionCreators(showLoginForm, dispatch),
+        register: bindActionCreators(register, dispatch)
     }
 }
 

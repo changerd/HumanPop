@@ -12,13 +12,13 @@ namespace DBRepository.Repositories
     public class HumanRepository: BaseRepository, IHumanRepository
     {
         public HumanRepository(string connectionString, IRepositoryContextFactory contextFactory): base(connectionString, contextFactory) { }
-        public async Task<Page<Human>> GetHumans(int index, int pageSize)
+        public async Task<Page<Human>> GetHumans(int index, int pageSize, int userId)
         {
             var result = new Page<Human> { CurrentPage = index, PageSize = pageSize };
             
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
-                var query = context.Humans.AsQueryable();
+                var query = context.Humans.Where(u => u.UserId == userId).AsQueryable();
 
                 result.TotalPages = await query.CountAsync();
                 result.Records = await query.Skip(index * pageSize).Take(pageSize).ToListAsync();

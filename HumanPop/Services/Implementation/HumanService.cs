@@ -9,26 +9,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HumanPop.Services.Implementation
 {
     public class HumanService : IHumanService
     {
-        IHumanRepository _repository;
+        IHumanRepository _repository;        
         IConfiguration _config;
         IMapper _mapper;
 
         public HumanService(IHumanRepository repository, IConfiguration configuration, IMapper mapper)
         {
-            _repository = repository;
+            _repository = repository;            
             _config = configuration;
             _mapper = mapper;
         }
 
-        public async Task<Page<HumansViewModels>> GetHumans(int pageIndex)
-        {
+        public async Task<Page<HumansViewModels>> GetHumans(int pageIndex, int userId)
+        {            
             var pageSize = _config.GetValue<int>("pageSize");
-            var page = await _repository.GetHumans(pageIndex, pageSize);
+            var page = await _repository.GetHumans(pageIndex, pageSize, userId);
             var result = _mapper.ToMappedPage<Human, HumansViewModels>(page);
             return result;
         }

@@ -6,7 +6,10 @@ export default class LoginForm extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            registerUsername: '',
+            registerPassword: '',
+            registerConfirmPassword: '',
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -54,8 +57,72 @@ export default class LoginForm extends React.Component {
                         />
                     </div>
                     <div className="dropdown-divider"></div>
-                    <a className="dropdown-item">New around here? Sign up</a>
+                    <button type="button"
+                        className="dropdown-item btn btn-dark"
+                        data-toggle="modal"
+                        data-target="#registerModal">
+                        New around here? Sign up
+                    </button>
                 </div>
+                {/*Modal*/}
+                <div className="modal fade" id="registerModal" tabIndex="-1" role="dialog" aria-labelledby="registerModallLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 id="registerModalLabel">Register new user</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="form-group">
+                                    <label htmlFor="registerUsername" className="form-label">Username</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="registerUsername"
+                                        value={this.state.registerUsername}
+                                        onChange={this.handleChange}
+                                        placeholder="Enter Username"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="registerPassword" className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        id="registerPassword"
+                                        value={this.state.registerPassword}
+                                        onChange={this.handleChange}
+                                        placeholder="Enter Password"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="registerConfirmPassword" className="form-label">Username</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        id="registerConfirmPassword"
+                                        value={this.state.registerConfirmPassword}
+                                        onChange={this.handleChange}
+                                        placeholder="ConfirmPassword"
+                                    />
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <input
+                                    type="button"
+                                    value="Register"
+                                    className="btn btn-dark"
+                                    onClick={() => this.props.onRegister(this.state.registerUsername, this.state.registerPassword, this.state.registerConfirmPassword)}
+                                />                                    
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addingHuman } from './newHumanActions.jsx'
+import { addHuman } from './newHumanActions.jsx'
 
 class NewHuman extends React.Component {
     constructor(props) {
@@ -18,7 +18,13 @@ class NewHuman extends React.Component {
 
     handleChange(event) {
         const { id, value } = event.currentTarget;
-        this.setState( { [id]: event.target.value })
+        this.setState({ [id]: event.target.value })
+    }
+
+    componentWillReceiveProps() {
+        if (this.props.isSaved) {
+            window.history.back();
+        }
     }
 
     render() {
@@ -31,10 +37,10 @@ class NewHuman extends React.Component {
                         type="input"
                         id="firstName"
                         className="form-control"
-                        value={ this.state.firstName }
-                        onChange={ this.handleChange }
+                        value={this.state.firstName}
+                        onChange={this.handleChange}
                         plaseholder="Enter human First Name"
-                     />
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="surName">Surname</label>
@@ -42,10 +48,10 @@ class NewHuman extends React.Component {
                         type="input"
                         id="surName"
                         className="form-control"
-                        value={ this.state.surName }
-                        onChange={ this.handleChange }
+                        value={this.state.surName}
+                        onChange={this.handleChange}
                         plaseholder="Enter human Surname"
-                     />
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="birthDate">Date of Birth</label>
@@ -53,9 +59,9 @@ class NewHuman extends React.Component {
                         type="date"
                         id="birthDate"
                         className="form-control"
-                        value={ this.state.birthDate }
-                        onChange={ this.handleChange }                        
-                     />
+                        value={this.state.birthDate}
+                        onChange={this.handleChange}
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="numOfArrests">Number of Arrests</label>
@@ -63,23 +69,24 @@ class NewHuman extends React.Component {
                         type="number"
                         id="numOfArrests"
                         className="form-control"
-                        value={ this.state.numOfArrests }
-                        onChange={ this.handleChange }
+                        value={this.state.numOfArrests}
+                        onChange={this.handleChange}
                         plaseholder="Enter number of Arrests"
-                     />
+                    />
                 </div>
                 <input
                     type="button"
                     className="btn btn-primary"
                     value="Submit"
-                    onClick={() => this.props.addingHuman(this.state.firstName,
+                    onClick={() => this.props.addHuman(
+                        this.state.firstName,
                         this.state.surName,
                         this.state.birthDate,
-                        this.state.numOfArrests,
-                        this.props.history)}
+                        this.state.numOfArrests
+                    )}
                 />
             </div>
-            
+
         )
     }
 };
@@ -92,7 +99,7 @@ let mapProps = (state) => {
 
 let mapDispatch = (dispatch) => {
     return {
-        addingHuman: bindActionCreators(addingHuman, dispatch),
+        addHuman: bindActionCreators(addHuman, dispatch),
     }
 }
 

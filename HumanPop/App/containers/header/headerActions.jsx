@@ -1,8 +1,12 @@
 import {
+    LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     LOGOUT,
-    SHOW_LOGIN_FORM
+    SHOW_LOGIN_FORM,
+    REGISTER_START,
+    REGISTER_SUCCESS,
+    REGISTER_ERROR
 } from './headerConstants.jsx';
 import AuthHelper from '../../Utils/authHelper.js';
 import { logUser } from '../../api/identityApi.jsx'
@@ -23,9 +27,36 @@ export function logout() {
 }
 
 export function login(userName, password) {
+    var identityData = {
+        'username': userName,
+        'password': password
+    }
+
     return {
         type: 'PROMISE',
-        actions: ['LOOGING', LOGIN_SUCCESS, LOGIN_ERROR],
-        promise: logUser(userName, password)
+        actions: [LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR],
+        url: constants.token,
+        method: 'POST',
+        data: identityData
     };
-}  
+}
+
+export function register(userName, password, confirmPassword) {
+    var registerData = {
+        'username': userName,
+        'password': password,
+        'confirmPassword': confirmPassword
+    }
+
+    if (password !== confirmPassword) {
+        alert('Password does not match');
+    } else {
+        return {
+            type: 'PROMISE',
+            actions: [REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR],
+            url: constants.register,
+            method: 'POST',
+            data: registerData
+        };
+    }
+}

@@ -39,7 +39,7 @@ class Humans extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.query != location.search) {
+        if (this.state.query != location.search || this.props.isDeleted == true) {
             this.setState({ query: location.search });
             this.loadHumans();
         }
@@ -104,6 +104,7 @@ class Humans extends React.Component {
 let mapProps = (state) => {
     return {
         humans: state.humans.data,
+        isDeleted: state.humans.isDeleted,
         error: state.humans.error,
     }
 }

@@ -1,20 +1,38 @@
 import "isomorphic-fetch";
+import AuthHelper from '../Utils/authHelper.js';
 
 const middleware = store => next => action => {
 
     if (action.type !== 'PROMISE') {
-        next(action);
+        return next(action);
     }
 
     const [startAction, successAction, failureAction] = action.actions;
     const { url, method, data } = action;
+    
+    console.log(url);
+    console.log(method);
+    console.log(data);
+
+    store.dispatch({
+        type: startAction
+    });
+
+    let headers = {
+        'Content-Type': 'application/json; charset=utf-8'
+    }
+
+    if(url !== constants.token || url !== constants.register) {
+        let token = AuthHelper.getToken();
+        headers['Authorization'] = 'Bearer ' + token
+    } 
+    
+    console.log(headers);
 
     fetch(url, {
         method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: data
+        headers: headers,
+        body: JSON.stringify(data)
     }).then((r) => r.json())
         .then((data) => {
             store.dispatch({
@@ -22,16 +40,12 @@ const middleware = store => next => action => {
                 payload: data
             });
         }, (error) => {
-            alert(error);
+            //alert(error);
             store.dispatch({
                 type: failureAction,
                 error
             });            
-        });
-
-    store.dispatch({
-        type: startAction
-    });
+        });    
 }
 
 export default middleware;

@@ -9,7 +9,7 @@ namespace HumanPop.Services.Interfaces
 {
     public interface IHumanService
     {
-        Task<Page<HumansViewModels>> GetHumans(int pageIndex);
+        Task<Page<HumansViewModels>> GetHumans(int pageIndex, int userId);
         Task<Human> GetHuman(int humanId);
         Task AddHuman(AddHumanRequest request);
         Task EditHuman(EditHumanRequest request);

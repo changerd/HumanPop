@@ -5,7 +5,7 @@ import {
 } from './newHumanConstants.jsx';
 //import { addHuman } from '../../api/humanApi.jsx';
 
-export function addingHuman(firstName, surName, birthDate, numOfArrests, historyObject) {
+export function addHuman(firstName, surName, birthDate, numOfArrests) {
     var newHumanData = {
         "firstName": firstName, 
         "surName": surName, 
@@ -19,5 +19,5 @@ export function addingHuman(firstName, surName, birthDate, numOfArrests, history
         url: constants.human,
         method: 'POST',
         data: newHumanData,
-    };
+        };
 }

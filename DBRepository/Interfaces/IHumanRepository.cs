@@ -8,7 +8,7 @@ namespace DBRepository.Interfaces
 {
     public interface IHumanRepository
     {
-        Task<Page<Human>> GetHumans(int index, int pageSize);
+        Task<Page<Human>> GetHumans(int index, int pageSize, int userId);
         Task<Human> GetHuman(int humanId);
         Task AddHuman(Human human);
         Task EditHuman(Human human);
