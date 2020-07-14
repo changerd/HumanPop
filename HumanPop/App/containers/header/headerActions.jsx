@@ -48,15 +48,11 @@ export function register(userName, password, confirmPassword) {
         'confirmPassword': confirmPassword
     }
 
-    if (password !== confirmPassword) {
-        alert('Password does not match');
-    } else {
-        return {
-            type: 'PROMISE',
-            actions: [REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR],
-            url: constants.register,
-            method: 'POST',
-            data: registerData
-        };
-    }
+    return {
+        type: 'PROMISE',
+        actions: [REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR],
+        url: constants.register,
+        method: 'POST',
+        data: registerData
+    };
 }

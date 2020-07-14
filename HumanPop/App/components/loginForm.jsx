@@ -114,17 +114,24 @@ export default class LoginForm extends React.Component {
                                     type="button"
                                     value="Register"
                                     className="btn btn-dark"
-                                    onClick={() => this.props.onRegister(this.state.registerUsername, this.state.registerPassword, this.state.registerConfirmPassword)}
-                                />                                    
+                                    onClick={() => {
+                                        if (this.state.registerPassword !== this.state.registerConfirmPassword) {
+                                            alert('Password does not match');
+                                        } else {
+                                            this.props.onRegister(this.state.registerUsername, this.state.registerPassword, this.state.registerConfirmPassword);
+                                            this.setState({
+                                                registerPassword: '',
+                                                registerConfirmPassword: '',
+                                            });
+                                        }
+                                    }}
+                                />
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         );
     }
 };

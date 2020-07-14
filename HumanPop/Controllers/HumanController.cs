@@ -46,14 +46,18 @@ namespace HumanPop.Controllers
         [Route("human")]
         [HttpPost]
         public async Task AddHuman([FromBody] AddHumanRequest request)
-        {            
+        {
+            var user = await _identityService.GetUser(User.Identity.Name);
+            request.UserId = user.UserId;
             await _humanService.AddHuman(request);            
         }
 
         [Route("human")]
         [HttpPut]
         public async Task EditProject([FromBody] EditHumanRequest request)
-        {            
+        {
+            var user = await _identityService.GetUser(User.Identity.Name);
+            request.UserId = user.UserId;
             await _humanService.EditHuman(request);
         }
 

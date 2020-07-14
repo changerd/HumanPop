@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -76,9 +77,11 @@ namespace HumanPop.Controllers
 
         [Route("register")]
         [HttpPost]
-        public async Task RegisterUser([FromBody]RegisterViewModel request)
+        public async Task<IActionResult> RegisterUser([FromBody]RegisterViewModel request)
         {
-            if (String.Equals(request.Password, request.ConfirmPassword))
+            var user = await _service.GetUser(request.Username);
+            
+            if (user == null)
             {
                 var sha256 = new SHA256Managed();
                 var passwordHash = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(request.Password)));
@@ -87,6 +90,19 @@ namespace HumanPop.Controllers
                     Login = request.Username,
                     Password = passwordHash
                 });
+                var response = new
+                {
+                    message = "Registration completed",
+                };                
+                return Ok(response);
+            }
+            else
+            {
+                var response = new
+                {
+                    message = "User already exist",
+                };
+                return Conflict(response);
             }
         }
     }

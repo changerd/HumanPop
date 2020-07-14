@@ -42,9 +42,13 @@ export default function header(state = initialState, action) {
             return { ...state, isRegistered: false, error: '' }
 
         case REGISTER_SUCCESS:
+            alert(action.payload.message);
+            if(action.payload.message == 'Registration completed') {                
+                $('#registerModal').modal('toggle');
+            }             
             return { ...state, isRegistered: true, error: '' }
 
-        case REGISTER_ERROR:
+        case REGISTER_ERROR:            
             return { ...state, isRegistered: false, error: action.payload }
 
         default:

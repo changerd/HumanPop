@@ -15,10 +15,10 @@ import AuthHelper from '../../Utils/authHelper.js';
 class Header extends React.Component {
     
     /*componentWillReceiveProps(nextProps) {
-        if(this.props.header.isLogged == true){
+        if(this.props.header.isRegistered == true){
             <Redirect to='/' />
         }
-    } */  
+    }*/   
 
     render() {
         let loginButton = this.props.header.isLogged ?

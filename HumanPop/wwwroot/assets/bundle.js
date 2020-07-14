@@ -37769,10 +37769,10 @@ var Header = function (_React$Component) {
 
 
         /*componentWillReceiveProps(nextProps) {
-            if(this.props.header.isLogged == true){
+            if(this.props.header.isRegistered == true){
                 <Redirect to='/' />
             }
-        } */
+        }*/
 
         value: function render() {
             var _this2 = this;
@@ -38076,7 +38076,15 @@ var LoginForm = function (_React$Component) {
                                     value: 'Register',
                                     className: 'btn btn-dark',
                                     onClick: function onClick() {
-                                        return _this2.props.onRegister(_this2.state.registerUsername, _this2.state.registerPassword, _this2.state.registerConfirmPassword);
+                                        if (_this2.state.registerPassword !== _this2.state.registerConfirmPassword) {
+                                            alert('Password does not match');
+                                        } else {
+                                            _this2.props.onRegister(_this2.state.registerUsername, _this2.state.registerPassword, _this2.state.registerConfirmPassword);
+                                            _this2.setState({
+                                                registerPassword: '',
+                                                registerConfirmPassword: ''
+                                            });
+                                        }
                                     }
                                 }),
                                 _react2.default.createElement(
@@ -38161,17 +38169,13 @@ function register(userName, password, confirmPassword) {
         'confirmPassword': confirmPassword
     };
 
-    if (password !== confirmPassword) {
-        alert('Password does not match');
-    } else {
-        return {
-            type: 'PROMISE',
-            actions: [_headerConstants.REGISTER_START, _headerConstants.REGISTER_SUCCESS, _headerConstants.REGISTER_ERROR],
-            url: constants.register,
-            method: 'POST',
-            data: registerData
-        };
-    }
+    return {
+        type: 'PROMISE',
+        actions: [_headerConstants.REGISTER_START, _headerConstants.REGISTER_SUCCESS, _headerConstants.REGISTER_ERROR],
+        url: constants.register,
+        method: 'POST',
+        data: registerData
+    };
 }
 
 /***/ }),
@@ -38519,6 +38523,10 @@ function header() {
             return _extends({}, state, { isRegistered: false, error: '' });
 
         case _headerConstants.REGISTER_SUCCESS:
+            alert(action.payload.message);
+            if (action.payload.message == 'Registration completed') {
+                $('#registerModal').modal('toggle');
+            }
             return _extends({}, state, { isRegistered: true, error: '' });
 
         case _headerConstants.REGISTER_ERROR:

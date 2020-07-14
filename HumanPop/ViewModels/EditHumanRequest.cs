@@ -12,5 +12,6 @@ namespace HumanPop.ViewModels
         public string SurName { get; set; }
         public DateTime BirthDate { get; set; }
         public string NumOfArrests { get; set; }
+        public int UserId { get; set; }
     }
 }
