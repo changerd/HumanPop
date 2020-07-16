@@ -9,6 +9,8 @@ import {
     REGISTER_ERROR
 } from './headerConstants.jsx';
 import AuthHelper from '../../Utils/authHelper.js';
+import { Redirect } from 'react-router-dom';
+import React from 'react';
 
 const initialState = {
     isLogged: AuthHelper.isLogged(),
@@ -25,7 +27,7 @@ export default function header(state = initialState, action) {
             return { ...state, isLogged: false, name: '', name: '', password: '', error: '' }
 
         case LOGIN_SUCCESS:
-            AuthHelper.saveAuth(action.payload.username, action.payload.access_token);            
+            AuthHelper.saveAuth(action.payload.username, action.payload.access_token);                      
             return { ...state, isLogged: true, isLoginFormShowed: false, name: action.payload, password: '', error: '' }            
 
         case LOGIN_ERROR:

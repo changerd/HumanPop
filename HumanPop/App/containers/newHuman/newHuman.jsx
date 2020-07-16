@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addHuman } from './newHumanActions.jsx'
+import { Redirect } from 'react-router-dom';
 
 class NewHuman extends React.Component {
     constructor(props) {
@@ -21,11 +22,11 @@ class NewHuman extends React.Component {
         this.setState({ [id]: event.target.value })
     }
 
-    componentWillReceiveProps() {
+    /*componentWillReceiveProps() {
         if (this.props.isSaved) {
-            window.history.back();
+            <Redirect to="/"/>
         }
-    }
+    }*/
 
     render() {
         return (

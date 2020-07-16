@@ -58,7 +58,7 @@ namespace HumanPop.Controllers
         {
             var user = await _identityService.GetUser(User.Identity.Name);
             request.UserId = user.UserId;
-            await _humanService.EditHuman(request);
+            await _humanService.EditHuman(request);            
         }
 
         [Route("human")]

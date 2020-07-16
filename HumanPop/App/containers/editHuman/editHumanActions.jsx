@@ -19,6 +19,7 @@ export function loadHuman (humanId) {
 
 export function changeHuman (humanId, firstName, surName, birthDate, numOfArrests) {
     var editHumanData = {
+        "humanId": humanId,
         "firstName": firstName, 
         "surName": surName, 
         "birthDate": birthDate, 

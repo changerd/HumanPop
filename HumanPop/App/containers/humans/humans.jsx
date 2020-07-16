@@ -17,15 +17,11 @@ class Humans extends React.Component {
 
     componentDidMount() {
         this.loadHumans();
+
     }
 
     removeHuman(humanId) {
-        let pageIndex;
-        const parsed = queryString.parse(location.search);
-        if (parsed) {
-            pageIndex = parsed['pageIndex'];
-        }
-        this.props.removeHuman(humanId, pageIndex);
+        this.props.removeHuman(humanId);
         this.loadHumans();
     }
 
@@ -35,12 +31,20 @@ class Humans extends React.Component {
         if (parsed) {
             pageIndex = parsed['pageIndex'];
         }
-        this.props.loadHumans(pageIndex);
+        if (this.props.isLogged) {
+            this.props.loadHumans(pageIndex);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.query != location.search || this.props.isDeleted == true) {
+        if ((this.state.query != location.search) /*|| (this.props.isLogged)*/) {
             this.setState({ query: location.search });
+            this.loadHumans();
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.isLogged !== prevProps.isLogged) {
             this.loadHumans();
         }
     }
@@ -69,9 +73,8 @@ class Humans extends React.Component {
             )
         });
 
-        return (
-            <div id="projects">
-                <br />
+        let renderPage = (this.props.isLogged) ?
+            <div>
                 <div className="row">
                     <div className="col">
                         <h3>Humans</h3>
@@ -97,6 +100,17 @@ class Humans extends React.Component {
                     {renderPageNumbers}
                 </div>
             </div>
+            :
+            <div className="text-center">
+                <h1>Login please</h1>
+            </div>
+
+
+        return (
+            <div id="projects">
+                <br />
+                {renderPage}
+            </div>
         );
     }
 };
@@ -104,8 +118,8 @@ class Humans extends React.Component {
 let mapProps = (state) => {
     return {
         humans: state.humans.data,
-        isDeleted: state.humans.isDeleted,
         error: state.humans.error,
+        isLogged: state.header.isLogged
     }
 }
 let mapDispatch = (dispath) => {

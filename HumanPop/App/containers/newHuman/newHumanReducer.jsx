@@ -15,6 +15,8 @@ export default function newHuman(state = initialState, action) {
             return { ...state, isSaved: false, error: ''}
 
         case ADD_HUMAN_SUCCESS:
+            console.log('success');
+            <Redirect to="/"/>
             return { ...state, isSaved: true, error: '' }
         
         case ADD_HUMAN_ERROR:

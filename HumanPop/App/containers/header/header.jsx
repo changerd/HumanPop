@@ -14,8 +14,8 @@ import AuthHelper from '../../Utils/authHelper.js';
 
 class Header extends React.Component {
     
-    /*componentWillReceiveProps(nextProps) {
-        if(this.props.header.isRegistered == true){
+    /*componentWillUpdate(nextProps) {
+        if(this.props.header.isLogged == true){
             <Redirect to='/' />
         }
     }*/   

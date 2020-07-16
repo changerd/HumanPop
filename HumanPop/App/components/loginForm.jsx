@@ -120,6 +120,7 @@ export default class LoginForm extends React.Component {
                                         } else {
                                             this.props.onRegister(this.state.registerUsername, this.state.registerPassword, this.state.registerConfirmPassword);
                                             this.setState({
+                                                registerUsername: '',
                                                 registerPassword: '',
                                                 registerConfirmPassword: '',
                                             });

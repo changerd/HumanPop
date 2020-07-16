@@ -9,7 +9,7 @@ const middleware = store => next => action => {
 
     const [startAction, successAction, failureAction] = action.actions;
     const { url, method, data } = action;
-    
+
     console.log(url);
     console.log(method);
     console.log(data);
@@ -22,11 +22,11 @@ const middleware = store => next => action => {
         'Content-Type': 'application/json; charset=utf-8'
     }
 
-    if(url !== constants.token || url !== constants.register) {
+    if ((url != constants.token) || url != (constants.register)) {
         let token = AuthHelper.getToken();
         headers['Authorization'] = 'Bearer ' + token
-    } 
-    
+    }
+
     console.log(headers);
 
     fetch(url, {
@@ -40,12 +40,13 @@ const middleware = store => next => action => {
                 payload: data
             });
         }, (error) => {
-            //alert(error);
+            alert(error);
+            console.log(error);
             store.dispatch({
                 type: failureAction,
                 error
             });            
-        });    
+        }); 
 }
 
 export default middleware;

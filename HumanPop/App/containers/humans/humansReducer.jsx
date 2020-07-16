@@ -14,8 +14,7 @@ const initialState = {
         pageSizes: 0,
         countRecords: 0,
         records: []
-    },
-    isDeleted: false,
+    },    
     error: '',
 }
 
@@ -31,10 +30,10 @@ export default function humans(state = initialState, action) {
             return { ...state, error: action.payload }
 
         case DELETE_HUMAN_START:
-            return { ...state, isDeleted: false, error: '' }
+            return { ...state, error: '' }
 
         case DELETE_HUMAN_SUCCESS:
-            return { ...state, isDeleted: true }
+            return { ...state, error: '' }
 
         case DELETE_HUMAN_ERROR:
             return { ...state, error: action.payload }
