@@ -22,9 +22,13 @@ const middleware = store => next => action => {
         'Content-Type': 'application/json; charset=utf-8'
     }
 
-    if ((url != constants.token) || url != (constants.register)) {
+    if (!(url == constants.token || url == constants.register)) {
         let token = AuthHelper.getToken();
         headers['Authorization'] = 'Bearer ' + token
+        if(!token){
+            alert('Need login');
+            return next(action);            
+        }        
     }
 
     console.log(headers);
