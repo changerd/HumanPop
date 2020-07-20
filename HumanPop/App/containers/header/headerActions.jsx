@@ -2,22 +2,12 @@ import {
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
-    LOGOUT,
-    SHOW_LOGIN_FORM,
+    LOGOUT,    
     REGISTER_START,
     REGISTER_SUCCESS,
     REGISTER_ERROR
 } from './headerConstants.jsx';
 import AuthHelper from '../../Utils/authHelper.js';
-import { logUser } from '../../api/identityApi.jsx'
-import "isomorphic-fetch"
-
-export function showLoginForm(show) {
-    return {
-        type: SHOW_LOGIN_FORM,
-        payload: show
-    }
-}
 
 export function logout() {
     AuthHelper.clearAuth();

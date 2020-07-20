@@ -17,7 +17,6 @@ class Humans extends React.Component {
 
     componentDidMount() {
         this.loadHumans();
-
     }
 
     removeHuman(humanId) {

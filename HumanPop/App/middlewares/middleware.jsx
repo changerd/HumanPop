@@ -25,10 +25,10 @@ const middleware = store => next => action => {
     if (!(url == constants.token || url == constants.register)) {
         let token = AuthHelper.getToken();
         headers['Authorization'] = 'Bearer ' + token
-        if(!token){
+        if (!token) {
             alert('Need login');
-            return next(action);            
-        }        
+            return next(action);
+        }
     }
 
     console.log(headers);
@@ -37,7 +37,11 @@ const middleware = store => next => action => {
         method: method,
         headers: headers,
         body: JSON.stringify(data)
-    }).then((r) => r.json())
+    }).then((r) => {
+        if (r.status == 200) {
+            return r.json();
+        }
+    })
         .then((data) => {
             store.dispatch({
                 type: successAction,
@@ -49,8 +53,8 @@ const middleware = store => next => action => {
             store.dispatch({
                 type: failureAction,
                 error
-            });            
-        }); 
+            });
+        });
 }
 
 export default middleware;

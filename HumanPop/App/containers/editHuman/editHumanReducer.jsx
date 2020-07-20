@@ -19,6 +19,7 @@ export default function editHuman(state = initialState, action) {
             return { ...state, isEditied: false, error: '' }
 
         case EDIT_HUMAN_SUCCESS:
+            window.history.back();
             return { ...state, isEditied: true, error: '' }
 
         case EDIT_HUMAN_ERROR:

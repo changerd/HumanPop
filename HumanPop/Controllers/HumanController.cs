@@ -45,27 +45,30 @@ namespace HumanPop.Controllers
 
         [Route("human")]
         [HttpPost]
-        public async Task AddHuman([FromBody] AddHumanRequest request)
+        public async Task<IActionResult> AddHuman([FromBody] AddHumanRequest request)
         {
             var user = await _identityService.GetUser(User.Identity.Name);
             request.UserId = user.UserId;
-            await _humanService.AddHuman(request);            
+            await _humanService.AddHuman(request);
+            return NoContent();
         }
 
         [Route("human")]
         [HttpPut]
-        public async Task EditProject([FromBody] EditHumanRequest request)
+        public async Task<IActionResult> EditProject([FromBody] EditHumanRequest request)
         {
             var user = await _identityService.GetUser(User.Identity.Name);
             request.UserId = user.UserId;
-            await _humanService.EditHuman(request);            
+            await _humanService.EditHuman(request);
+            return NoContent();
         }
 
         [Route("human")]
         [HttpDelete]
-        public async Task DeleteHuman(int humanId)
+        public async Task<IActionResult> DeleteHuman(int humanId)
         {
             await _humanService.DeleteHuman(humanId);
+            return NoContent();
         }
     }
 }

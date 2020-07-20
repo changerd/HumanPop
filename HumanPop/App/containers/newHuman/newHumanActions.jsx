@@ -3,7 +3,6 @@ import {
     ADD_HUMAN_SUCCESS,
     ADD_HUMAN_ERROR,
 } from './newHumanConstants.jsx';
-//import { addHuman } from '../../api/humanApi.jsx';
 
 export function addHuman(firstName, surName, birthDate, numOfArrests) {
     var newHumanData = {

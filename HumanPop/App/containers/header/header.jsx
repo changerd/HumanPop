@@ -6,21 +6,13 @@ import { Link, Redirect } from 'react-router-dom';
 import LoginForm from '../../components/loginForm.jsx'
 import {
     login,
-    logout,
-    showLoginForm,
+    logout,    
     register,
 } from './headerActions.jsx';
 import AuthHelper from '../../Utils/authHelper.js';
 
 class Header extends React.Component {
-    
-    /*componentWillUpdate(nextProps) {
-        if(this.props.header.isLogged == true){
-            <Redirect to='/' />
-        }
-    }*/   
-
-    render() {
+     render() {
         let loginButton = this.props.header.isLogged ?
             <span className="nameLabel">Hello, {AuthHelper.getLogin()}</span> :
             <LoginForm onLogin={this.props.login} onRegister={this.props.register} />
@@ -59,8 +51,7 @@ let mapProps = (state) => {
 let mapDispatch = (dispatch) => {
     return {
         login: bindActionCreators(login, dispatch),
-        logout: bindActionCreators(logout, dispatch),
-        showLoginForm: bindActionCreators(showLoginForm, dispatch),
+        logout: bindActionCreators(logout, dispatch),        
         register: bindActionCreators(register, dispatch)
     }
 }

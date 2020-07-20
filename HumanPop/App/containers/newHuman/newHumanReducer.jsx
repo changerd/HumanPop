@@ -4,23 +4,21 @@ import {
     ADD_HUMAN_ERROR,
 } from './newHumanConstants.jsx';
 
-const initialState = {
-    isSaved: false,
+const initialState = {    
     error: ''
 }
 
 export default function newHuman(state = initialState, action) {
     switch (action.type) {
         case ADD_HUMAN_START:
-            return { ...state, isSaved: false, error: ''}
+            return { ...state, error: ''}
 
         case ADD_HUMAN_SUCCESS:
-            console.log('success');
-            <Redirect to="/"/>
-            return { ...state, isSaved: true, error: '' }
+            window.history.back();
+            return { ...state, error: '' }
         
         case ADD_HUMAN_ERROR:
-            return { ...state, isSaved: false, error: action.payload }
+            return { ...state, error: action.payload }
 
         default:
             return state;

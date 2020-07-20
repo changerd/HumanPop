@@ -6,7 +6,6 @@ import {
     DELETE_HUMAN_SUCCESS,
     DELETE_HUMAN_ERROR,
 } from './humansConstants.jsx';
-import { getHumans, deleteHuman } from './../../api/humanApi.jsx';
 
 export function loadHumans(pageIndex = 0) {
     let queryTrailer = '?pageIndex=' + pageIndex;
